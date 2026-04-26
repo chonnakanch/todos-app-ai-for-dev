@@ -67,7 +67,7 @@ const App: React.FC = () => {
     });
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-pink-50 dark:from-slate-900 dark:via-slate-900 dark:to-slate-800 transition-colors duration-500">
+    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-pink-50 transition-colors duration-500">
       <div className="max-w-md mx-auto px-4 py-8 md:py-12">
         {/* Header */}
         <header className="mb-8 flex justify-between items-end">
@@ -75,19 +75,19 @@ const App: React.FC = () => {
             <h1 className="text-3xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
               Focus
             </h1>
-            <p className="text-slate-500 dark:text-slate-400 text-sm">
+            <p className="text-slate-500 text-sm">
               {format(new Date(), 'EEEE, MMMM do')}
             </p>
           </div>
-          <div className="flex bg-slate-200/50 dark:bg-slate-800/50 p-1 rounded-xl glass">
+          <div className="flex bg-slate-200/50 p-1 rounded-xl glass">
             {(['Work', 'Private'] as Category[]).map(tab => (
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
                 className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
                   activeTab === tab 
-                    ? 'bg-white dark:bg-slate-700 shadow-sm text-primary scale-105' 
-                    : 'text-slate-500 hover:text-slate-700 dark:text-slate-400'
+                    ? 'bg-white shadow-sm text-primary scale-105' 
+                    : 'text-slate-500 hover:text-slate-700'
                 }`}
               >
                 {tab === 'Work' ? <Briefcase size={16} /> : <User size={16} />}
@@ -99,7 +99,7 @@ const App: React.FC = () => {
 
         {/* Add Todo Section */}
         <div className={`mb-8 transition-all duration-300 ${isInputExpanded ? 'scale-100' : 'scale-98'}`}>
-          <form onSubmit={addTodo} className="glass rounded-2xl p-4 shadow-xl shadow-indigo-100/20 dark:shadow-none border border-white/20 dark:border-slate-700">
+          <form onSubmit={addTodo} className="glass rounded-2xl p-4 shadow-xl shadow-indigo-100/20 border border-white/20">
             <div className="flex items-center gap-3">
               <div className="flex-1 relative">
                 <input
@@ -108,7 +108,7 @@ const App: React.FC = () => {
                   value={newTodo}
                   onChange={(e) => setNewTodo(e.target.value)}
                   onFocus={() => setIsInputExpanded(true)}
-                  className="w-full bg-transparent border-none focus:ring-0 text-slate-800 dark:text-white placeholder:text-slate-400"
+                  className="w-full bg-transparent border-none focus:ring-0 text-slate-800 placeholder:text-slate-400"
                 />
               </div>
               <button 
@@ -121,8 +121,8 @@ const App: React.FC = () => {
             </div>
             
             {isInputExpanded && (
-              <div className="mt-4 pt-4 border-t border-slate-100 dark:border-slate-700 flex items-center gap-4 animate-in fade-in slide-in-from-top-2">
-                <div className="flex items-center gap-2 text-slate-500 dark:text-slate-400">
+              <div className="mt-4 pt-4 border-t border-slate-100 flex items-center gap-4 animate-in fade-in slide-in-from-top-2">
+                <div className="flex items-center gap-2 text-slate-500">
                   <Calendar size={16} />
                   <input
                     type="date"
@@ -149,8 +149,8 @@ const App: React.FC = () => {
         <main className="space-y-4">
           {filteredTodos.length === 0 ? (
             <div className="text-center py-12 opacity-50">
-              <div className="w-16 h-16 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-4">
-                <CheckCircle2 className="text-slate-300 dark:text-slate-600" />
+              <div className="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <CheckCircle2 className="text-slate-300" />
               </div>
               <p className="text-slate-400">No {activeTab.toLowerCase()} tasks yet</p>
             </div>
@@ -161,7 +161,7 @@ const App: React.FC = () => {
               return (
                 <div 
                   key={todo.id}
-                  className={`group flex items-center gap-4 p-4 glass rounded-2xl transition-all duration-300 hover:shadow-lg hover:shadow-indigo-100/10 dark:hover:shadow-none border border-white/10 dark:border-slate-800 ${
+                  className={`group flex items-center gap-4 p-4 glass rounded-2xl transition-all duration-300 hover:shadow-lg hover:shadow-indigo-100/10 border border-white/10 ${
                     todo.completed ? 'opacity-60 grayscale-[0.5]' : ''
                   }`}
                 >
@@ -174,15 +174,15 @@ const App: React.FC = () => {
                   
                   <div className="flex-1 min-w-0">
                     <h3 className={`text-base font-medium truncate transition-all ${
-                      todo.completed ? 'line-through text-slate-400' : 'text-slate-700 dark:text-slate-200'
+                      todo.completed ? 'line-through text-slate-400' : 'text-slate-700'
                     }`}>
                       {todo.text}
                     </h3>
                     <div className="flex items-center gap-3 mt-1">
                       <div className={`flex items-center gap-1 text-[11px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full ${
                         isOverdue 
-                          ? 'bg-red-50 text-red-500 dark:bg-red-900/20' 
-                          : 'bg-slate-100 text-slate-500 dark:bg-slate-800 dark:text-slate-400'
+                          ? 'bg-red-50 text-red-500' 
+                          : 'bg-slate-100 text-slate-500'
                       }`}>
                         <Clock size={10} />
                         {isOverdue ? 'Overdue' : format(parseISO(todo.deadline), 'MMM d')}
@@ -192,7 +192,7 @@ const App: React.FC = () => {
 
                   <button 
                     onClick={() => deleteTodo(todo.id)}
-                    className="opacity-0 group-hover:opacity-100 p-2 text-slate-300 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-xl transition-all"
+                    className="opacity-0 group-hover:opacity-100 p-2 text-slate-300 hover:text-red-500 hover:bg-red-50 rounded-xl transition-all"
                   >
                     <Trash2 size={18} />
                   </button>
